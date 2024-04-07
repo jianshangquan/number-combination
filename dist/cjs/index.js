@@ -1,15 +1,15 @@
-"use client"
 'use strict';
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findSeries = void 0;
-function sum(number = '') {
+exports.findSeries = exports.sumSeries = void 0;
+function sumSeries(number = '') {
     let result = number.toString().split('').map(r => Number(r)).reduce((prev, cur) => prev + cur, 0);
     if (result.toString().length > 1) {
-        result = sum(result.toString());
+        result = sumSeries(result.toString());
     }
     return result;
 }
+exports.sumSeries = sumSeries;
 function findSeries({ pattern, sumof } = { pattern: '', sumof: 1 }) {
     pattern.length || 0;
     const occurances = findOccurance(pattern);
@@ -30,7 +30,7 @@ function findSeries({ pattern, sumof } = { pattern: '', sumof: 1 }) {
         const endString = pattern.substring(occur.end, pattern.length);
         const n = `${startString}${replaceNumber.value}${endString}`;
         if (sumof) {
-            if (sum(n) == sumof)
+            if (sumSeries(n) == sumof)
                 possibleNumber.push(n);
         }
         else {
